@@ -3,12 +3,15 @@
 import Link from 'next/link';
 import { BRAND, NAV_LINKS, BRAND_VALUES } from '@/lib/constants';
 import FadeIn from '@/components/animation/FadeIn';
+import Instagram from '@mui/icons-material/Instagram';
+import LinkedIn from '@mui/icons-material/LinkedIn';
+import { FaXTwitter } from 'react-icons/fa6';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-charcoal text-ivory">
+    <footer data-theme="dark" className="bg-charcoal text-ivory">
       {/* Newsletter Section */}
       <div className="container-luxury section-padding border-b border-white/10">
         <FadeIn>
@@ -57,14 +60,19 @@ export default function Footer() {
             <p className="text-ivory/40 text-sm mt-4 leading-relaxed max-w-xs">
               {BRAND.tagline}
             </p>
-            <div className="flex gap-6 mt-8">
-              {['Instagram', 'LinkedIn', 'X'].map((social) => (
+            <div className="flex items-center gap-6 mt-8">
+              {[
+                { icon: <Instagram sx={{ fontSize: 18, color: 'inherit' }} />, label: 'Instagram', href: '#' },
+                { icon: <LinkedIn sx={{ fontSize: 18, color: 'inherit' }} />, label: 'LinkedIn', href: '#' },
+                { icon: <FaXTwitter size={14} />, label: 'X', href: '#' },
+              ].map((social) => (
                 <a
-                  key={social}
-                  href="#"
-                  className="text-ivory/30 text-xs tracking-[0.15em] uppercase hover:text-ivory transition-colors duration-300 animated-underline"
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="flex items-center justify-center w-5 h-5 text-ivory/30 hover:text-ivory transition-colors duration-300"
                 >
-                  {social}
+                  {social.icon}
                 </a>
               ))}
             </div>

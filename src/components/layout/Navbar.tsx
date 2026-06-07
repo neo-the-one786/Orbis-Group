@@ -9,9 +9,10 @@ import { NAV_LINKS, BRAND } from '@/lib/constants';
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [isOverDark, setIsOverDark] = useState(false);
+  const [isOverDark, setIsOverDark] = useState(true);
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
+  const rafRef = useRef<number>(0);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 80);
@@ -19,7 +20,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Detect dark background sections under the navbar
+  // Detect dark/light background under navbar — throttled with rAF
   useEffect(() => {
     const checkBackground = () => {
       if (!navRef.current) return;
@@ -28,31 +29,28 @@ export default function Navbar() {
       const navMidY = navRect.top + navRect.height / 2;
       const navMidX = navRect.left + navRect.width / 2;
 
-      // Sample the element directly below the navbar center
       const elementsBelow = document.elementsFromPoint(navMidX, navMidY);
-      
-      const darkSections = elementsBelow.some((el) => {
-        const bg = window.getComputedStyle(el).backgroundColor;
-        if (!bg || bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent') return false;
-        
-        // Parse rgb values
-        const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-        if (!match) return false;
-        
-        const r = parseInt(match[1]);
-        const g = parseInt(match[2]);
-        const b = parseInt(match[3]);
-        const luminance = (0.299 * r + 0.587 * g + 0.114 * b);
-        
-        return luminance < 80; // Dark background
+
+      const isDark = elementsBelow.some((el) => {
+        if (el === navRef.current || navRef.current?.contains(el)) return false;
+        // Check if the element or any ancestor is marked as dark
+        return el instanceof HTMLElement && !!el.closest('[data-theme="dark"]');
       });
 
-      setIsOverDark(darkSections);
+      setIsOverDark(isDark);
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(checkBackground);
     };
 
     checkBackground();
-    window.addEventListener('scroll', checkBackground, { passive: true });
-    return () => window.removeEventListener('scroll', checkBackground);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(rafRef.current);
+    };
   }, [pathname]);
 
   useEffect(() => {
@@ -64,11 +62,8 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [isMobileOpen]);
 
-  // Determine text color: 
-  // - Not scrolled → always ivory (hero is dark)
-  // - Scrolled & over dark section → ivory text, dark bg with transparency
-  // - Scrolled & over light section → charcoal text, ivory bg
-  const isDark = !isScrolled || isOverDark;
+  // Text color: ivory over dark sections, charcoal over light sections
+  const textColor = isOverDark ? 'text-ivory' : 'text-charcoal';
 
   return (
     <>
@@ -79,9 +74,7 @@ export default function Navbar() {
         transition={{ duration: 0.8, delay: 2.4, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-700 ${
           isScrolled
-            ? isOverDark
-              ? 'bg-charcoal/80 backdrop-blur-md border-b border-ivory/10'
-              : 'bg-ivory/95 backdrop-blur-md border-b border-border/50 shadow-soft'
+            ? 'backdrop-blur-xl border-b border-charcoal/5'
             : 'bg-transparent'
         }`}
       >
@@ -89,9 +82,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="relative z-10">
             <span
-              className={`text-xl md:text-2xl tracking-[0.15em] uppercase transition-colors duration-500 ${
-                isDark ? 'text-ivory' : 'text-charcoal'
-              }`}
+              className={`text-xl md:text-2xl tracking-[0.15em] uppercase transition-colors duration-500 ${textColor}`}
               style={{ fontFamily: 'var(--font-serif)' }}
             >
               {BRAND.name}
@@ -104,9 +95,9 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`animated-underline text-sm tracking-[0.1em] uppercase transition-colors duration-500 ${
+                className={`animated-underline text-sm tracking-[0.1em] uppercase transition-colors duration-500 ${textColor} ${
                   pathname === link.href ? 'opacity-100' : 'opacity-70 hover:opacity-100'
-                } ${isDark ? 'text-ivory' : 'text-charcoal'}`}
+                }`}
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
                 {link.label}
@@ -114,11 +105,11 @@ export default function Navbar() {
             ))}
             <Link
               href="/collaborations#inquiry"
-              className={`btn-luxury text-xs py-3 px-6 ${
-                isDark
+              className={`btn-luxury text-xs py-3 px-6 transition-all duration-500 ${
+                isOverDark
                   ? 'bg-ivory/10 text-ivory border border-ivory/30 hover:bg-ivory/20'
                   : 'bg-charcoal text-ivory hover:bg-royal-blue'
-              } transition-all duration-500`}
+              }`}
             >
               <span>Book A Call</span>
             </Link>
@@ -133,16 +124,12 @@ export default function Navbar() {
           >
             <span
               className={`block w-6 h-px transition-all duration-500 ${
-                isMobileOpen
-                  ? 'rotate-45 translate-y-[3.5px] bg-ivory'
-                  : isDark ? 'bg-ivory' : 'bg-charcoal'
+                isMobileOpen ? 'rotate-45 translate-y-[3.5px] bg-ivory' : textColor === 'text-ivory' ? 'bg-ivory' : 'bg-charcoal'
               }`}
             />
             <span
               className={`block w-6 h-px transition-all duration-500 ${
-                isMobileOpen
-                  ? '-rotate-45 -translate-y-[3.5px] bg-ivory'
-                  : isDark ? 'bg-ivory' : 'bg-charcoal'
+                isMobileOpen ? '-rotate-45 -translate-y-[3.5px] bg-ivory' : textColor === 'text-ivory' ? 'bg-ivory' : 'bg-charcoal'
               }`}
             />
           </button>

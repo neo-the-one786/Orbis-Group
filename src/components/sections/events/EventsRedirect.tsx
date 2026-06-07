@@ -6,7 +6,7 @@ import FadeIn from '@/components/animation/FadeIn';
 
 export default function EventsRedirect() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section data-theme="dark" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 silk-bg" aria-hidden="true" />
       <div

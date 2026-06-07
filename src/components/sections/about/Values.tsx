@@ -6,7 +6,7 @@ import FadeIn from '@/components/animation/FadeIn';
 
 export default function Values() {
   return (
-    <section className="section-padding bg-charcoal">
+    <section data-theme="dark" className="section-padding bg-charcoal">
       <div className="container-luxury text-center">
         <FadeIn>
           <p className="text-caption text-ivory/30 mb-6">Our Values</p>

@@ -47,7 +47,7 @@ export default function LoadingScreen() {
                   fontWeight="400"
                   letterSpacing="-0.02em"
                 >
-                  W
+                  O
                 </text>
               </svg>
             </motion.div>

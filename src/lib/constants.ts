@@ -141,19 +141,19 @@ export const CASE_STUDIES = [
 export const TESTIMONIALS = [
   {
     quote: 'Orbis Group transformed our brand presence entirely. The experience they created wasn\'t just an event — it was a cultural moment that people still reference.',
-    author: 'Arjun Mehta',
+    author: 'John Doe',
     role: 'Chief Marketing Officer',
     company: 'Maison Élégance',
   },
   {
     quote: 'Working with Orbis Group felt like collaborating with a luxury atelier. Every detail was considered, every moment was intentional. The results spoke for themselves.',
-    author: 'Priya Sharma',
+    author: 'Jane Doe',
     role: 'Head of Brand Partnerships',
     company: 'NexGen Labs',
   },
   {
     quote: 'They don\'t just plan experiences — they architect emotions. Our audience left not as attendees, but as advocates.',
-    author: 'David Chen',
+    author: 'John Doe',
     role: 'Founder & Creative Director',
     company: 'The Collective Kitchen',
   },
@@ -184,12 +184,12 @@ export const INDUSTRIES = [
 ] as const;
 
 export const TIMELINE_EVENTS = [
-  { year: '2019', title: 'Founded', description: 'Orbis Group was born from a conviction that experiences should be as considered as the brands behind them.' },
-  { year: '2020', title: 'Digital Pivot', description: 'Pioneered hybrid experience formats, proving that digital-first doesn\'t mean experience-last.' },
-  { year: '2021', title: 'First 50', description: 'Reached 50 brand partnerships and established our reputation for luxury experiential marketing.' },
-  { year: '2022', title: 'National Reach', description: 'Expanded operations across 8 cities, bringing our approach to new audiences and markets.' },
-  { year: '2023', title: 'The Culture Shift', description: 'Launched our signature "Culture Series" — experiences designed to become part of the cultural conversation.' },
-  { year: '2024', title: '1M+ Reached', description: 'Surpassed one million audience members across all experiences, cementing our position as a market leader.' },
+  { year: 'Early 2026', title: 'The Idea', description: 'Orbis Group was conceived — a vision to reshape how brands create and deliver unforgettable experiences.' },
+  { year: 'Q1 2026', title: 'Foundation', description: 'The founding team came together, united by a conviction that experiences should be as considered as the brands behind them.' },
+  { year: 'Q2 2026', title: 'Brand Identity', description: 'Developed our creative framework, brand positioning, and the strategic blueprint for Orbis Group\'s market entry.' },
+  { year: 'Mid 2026', title: 'First Partnerships', description: 'Began building relationships with early brand partners and collaborators who share our vision for experiential excellence.' },
+  { year: 'H2 2026', title: 'Launch Phase', description: 'Preparing to launch our first signature experiences and establish Orbis Group as a new force in experiential marketing.' },
+  { year: 'Beyond', title: 'The Vision', description: 'Scale nationally, build a portfolio of iconic experiences, and become the definitive name in premium experiential marketing.' },
 ] as const;
 
 export const PRINCIPLES = [
@@ -212,10 +212,10 @@ export const PRINCIPLES = [
 ] as const;
 
 export const TEAM_MEMBERS = [
-  { name: 'Anika Rao', role: 'Founder & Creative Director', initial: 'AR' },
-  { name: 'Marcus Webb', role: 'Head of Strategy', initial: 'MW' },
-  { name: 'Zara Patel', role: 'Director of Partnerships', initial: 'ZP' },
-  { name: 'James Okafor', role: 'Head of Production', initial: 'JO' },
-  { name: 'Leila Kim', role: 'Brand Director', initial: 'LK' },
-  { name: 'Rohan Desai', role: 'Head of Digital', initial: 'RD' },
+  { name: 'John Doe', role: 'Founder & Creative Director', initial: 'JD' },
+  { name: 'Jane Doe', role: 'Head of Strategy', initial: 'JD' },
+  { name: 'John Doe', role: 'Director of Partnerships', initial: 'JD' },
+  { name: 'Jane Doe', role: 'Head of Production', initial: 'JD' },
+  { name: 'John Doe', role: 'Brand Director', initial: 'JD' },
+  { name: 'Jane Doe', role: 'Head of Digital', initial: 'JD' },
 ] as const;

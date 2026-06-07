@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function AboutHero() {
   return (
-    <section className="relative min-h-[80vh] flex items-end overflow-hidden">
+    <section data-theme="dark" className="relative min-h-[80vh] flex items-end overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 silk-bg" aria-hidden="true" />
       <div

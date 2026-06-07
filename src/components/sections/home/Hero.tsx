@@ -93,7 +93,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" data-theme="dark" className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Canvas Background */}
       <canvas
         ref={canvasRef}
@@ -119,7 +119,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 2.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-caption text-ivory/40 mb-8"
         >
-          Premium Experiential Marketing
+          Strategy · Experiences · Culture
         </motion.p>
 
         {/* Main Headline */}
@@ -127,7 +127,7 @@ export default function Hero() {
           className="text-hero text-ivory max-w-5xl mx-auto mb-8"
           style={{ fontFamily: 'var(--font-serif)' }}
         >
-          {['Experiences', 'Designed', 'Beautifully.'].map((line, i) => (
+          {['Orbis Group.'].map((line, i) => (
             <span key={i} className="block overflow-hidden">
               <motion.span
                 className="block"
@@ -135,7 +135,7 @@ export default function Hero() {
                 animate={{ y: '0%', opacity: 1 }}
                 transition={{
                   duration: 1,
-                  delay: 3 + i * 0.15,
+                  delay: 3,
                   ease: [0.16, 1, 0.3, 1],
                 }}
               >
@@ -153,7 +153,7 @@ export default function Hero() {
           className="text-large text-ivory/50 max-w-xl mx-auto mb-12"
           style={{ fontFamily: 'var(--font-sans)' }}
         >
-          Strategy, partnerships, and unforgettable brand activations.
+          Experiences designed beautifully — strategy, partnerships, and unforgettable brand activations.
         </motion.p>
 
         {/* CTAs */}

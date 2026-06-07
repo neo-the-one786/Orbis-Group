@@ -18,7 +18,7 @@ export default function Testimonials() {
   }, [next]);
 
   return (
-    <section id="testimonials" className="section-padding bg-charcoal">
+    <section id="testimonials" data-theme="dark" className="section-padding bg-charcoal">
       <div className="container-narrow">
         <FadeIn className="text-center mb-16">
           <p className="text-caption text-ivory/30 mb-4">Testimonials</p>
