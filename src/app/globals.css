@@ -1,26 +1,428 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   WeMonkey — Design System
+   Luxury Editorial Visual Language
+   ============================================================ */
+
+@theme {
+  /* ── Colour System ── */
+  --color-ivory: #F8F5EE;
+  --color-alabaster: #F3EFE7;
+  --color-royal-blue: #1E3A8A;
+  --color-tyrian: #5D1A66;
+  --color-emerald: #046A38;
+  --color-jade: #00A86B;
+  --color-charcoal: #141414;
+  --color-charcoal-light: #444444;
+  --color-border: #D8D2C7;
+  --color-border-light: #E8E3D9;
+
+  /* ── Typography Scale ── */
+  --font-serif: "Playfair Display", "Georgia", serif;
+  --font-sans: "Inter", "Helvetica Neue", "Arial", sans-serif;
+
+  --text-hero: clamp(3.5rem, 10vw, 11.25rem);
+  --text-section: clamp(2.5rem, 6vw, 6rem);
+  --text-subsection: clamp(1.75rem, 3.5vw, 3rem);
+  --text-large: clamp(1.25rem, 1.5vw, 1.5rem);
+  --text-body: clamp(1rem, 1.2vw, 1.375rem);
+  --text-small: clamp(0.75rem, 0.9vw, 0.875rem);
+  --text-caption: 0.75rem;
+
+  /* ── Spacing ── */
+  --spacing-section: clamp(6rem, 12vh, 12rem);
+  --spacing-block: clamp(3rem, 6vh, 6rem);
+
+  /* ── Easing ── */
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
+  /* ── Shadows ── */
+  --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.04);
+  --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.08);
+  --shadow-dramatic: 0 20px 80px rgba(0, 0, 0, 0.12);
+
+  /* ── Animations ── */
+  --animate-fade-in: fade-in 0.8s var(--ease-luxury) forwards;
+  --animate-fade-up: fade-up 1s var(--ease-luxury) forwards;
+  --animate-slide-up: slide-up 0.8s var(--ease-luxury) forwards;
+  --animate-scale-in: scale-in 0.6s var(--ease-luxury) forwards;
+  --animate-text-reveal: text-reveal 1.2s var(--ease-out-expo) forwards;
+  --animate-line-grow: line-grow 1s var(--ease-luxury) forwards;
+  --animate-grain: grain 8s steps(10) infinite;
+  --animate-shimmer: shimmer 3s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 4s ease-in-out infinite;
+  --animate-silk: silk 20s ease-in-out infinite;
+  --animate-gradient-shift: gradient-shift 15s ease infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Keyframes ── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes text-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0% 0 0); }
+}
+
+@keyframes line-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes silk {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 100% 0%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes scroll-hint {
+  0% { opacity: 0; transform: translateY(-8px); }
+  40% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(8px); }
+}
+
+/* ── Base Styles ── */
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: var(--color-border) var(--color-ivory);
+  scrollbar-width: thin;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--color-ivory);
+  color: var(--color-charcoal);
+  line-height: 1.7;
+  font-size: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-royal-blue);
+  color: white;
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* ── Utility Classes ── */
+.text-hero {
+  font-size: clamp(2.75rem, 6vw, 5.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.text-section {
+  font-size: var(--text-section);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.text-subsection {
+  font-size: var(--text-subsection);
+  line-height: 1.15;
+}
+
+.text-large {
+  font-size: var(--text-large);
+  line-height: 1.6;
+}
+
+.text-body {
+  font-size: var(--text-body);
+  line-height: 1.7;
+}
+
+.text-small {
+  font-size: var(--text-small);
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+.text-caption {
+  font-size: var(--text-caption);
+  line-height: 1.5;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+/* ── Luxury Grain Overlay ── */
+.grain-overlay {
+  position: fixed;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  animation: var(--animate-grain);
+  opacity: 0.35;
+}
+
+/* ── Scroll Progress Bar ── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-royal-blue), var(--color-tyrian));
+  z-index: 10000;
+  transform-origin: left;
+}
+
+/* ── Luxury Button Styles ── */
+.btn-luxury {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.125rem 2.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.5s var(--ease-luxury);
+}
+
+.btn-luxury::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s var(--ease-luxury);
+}
+
+.btn-luxury:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.btn-luxury span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-primary {
+  background-color: var(--color-charcoal);
+  color: var(--color-ivory);
+}
+
+.btn-primary::before {
+  background-color: var(--color-royal-blue);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-charcoal);
+  border: 1px solid var(--color-charcoal);
+}
+
+.btn-outline::before {
+  background-color: var(--color-charcoal);
+}
+
+.btn-outline:hover {
+  color: var(--color-ivory);
+}
+
+/* ── Animated Underline ── */
+.animated-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-luxury);
+}
+
+.animated-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ── Section Spacing ── */
+.section-padding {
+  padding-top: var(--spacing-section);
+  padding-bottom: var(--spacing-section);
+}
+
+.block-padding {
+  padding-top: var(--spacing-block);
+  padding-bottom: var(--spacing-block);
+}
+
+/* ── Container ── */
+.container-luxury {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 6rem);
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 6rem);
+}
+
+.container-wide {
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 4rem);
+}
+
+/* ── Divider ── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+.divider-accent {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-royal-blue), var(--color-tyrian));
+}
+
+/* ── Card Hover Effects ── */
+.card-luxury {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.6s var(--ease-luxury), box-shadow 0.6s var(--ease-luxury);
+}
+
+.card-luxury:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-dramatic);
+}
+
+/* ── Loading Screen ── */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-charcoal);
+}
+
+/* ── Silk Hero Background ── */
+.silk-bg {
+  background: linear-gradient(
+    135deg,
+    var(--color-charcoal) 0%,
+    #1a1a2e 20%,
+    #16213e 35%,
+    var(--color-royal-blue) 50%,
+    #1a1a2e 65%,
+    #0f0f23 80%,
+    var(--color-charcoal) 100%
+  );
+  background-size: 400% 400%;
+  animation: var(--animate-silk);
+}
+
+/* ── Responsive Utilities ── */
+@media (max-width: 768px) {
+  .section-padding {
+    padding-top: clamp(3rem, 8vh, 6rem);
+    padding-bottom: clamp(3rem, 8vh, 6rem);
+  }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .grain-overlay {
+    display: none;
+  }
 }

@@ -1,15 +1,18 @@
 // ============================================================
-// WeMonkey — Brand Constants & Content
+// Orbis Group — Brand Constants & Content
 // ============================================================
 
 export const BRAND = {
-  name: 'WeMonkey',
-  tagline: 'Experiences That Become Culture',
+  name: 'Orbis Group',
+  nameShort: 'Orbis',
+  tagline: 'Experiences Designed Beautifully.',
   description:
-    'WeMonkey is a luxury digital marketing and experiential partnerships company. We collaborate with brands, organisations, creators, institutions, and communities to create exceptional experiences that people remember.',
+    'Orbis Group is a premium experiential marketing and partnership company that creates memorable experiences through collaboration, culture, and exceptional execution. We work with brands, organisations, creators, institutions, and communities to transform ideas into experiences.',
   positioning: 'We turn audiences into communities and events into culture.',
-  url: 'https://wemonkey.com',
-  eventPlatformUrl: 'https://events.wemonkey.com',
+  url: 'https://orbisgroup.com',
+  eventPlatformName: 'WeMonkey',
+  eventPlatformUrl: 'https://wemonkey.com',
+  email: 'hello@orbisgroup.com',
 } as const;
 
 export const NAV_LINKS = [
@@ -137,13 +140,13 @@ export const CASE_STUDIES = [
 
 export const TESTIMONIALS = [
   {
-    quote: 'WeMonkey transformed our brand presence entirely. The experience they created wasn\'t just an event — it was a cultural moment that people still reference.',
+    quote: 'Orbis Group transformed our brand presence entirely. The experience they created wasn\'t just an event — it was a cultural moment that people still reference.',
     author: 'Arjun Mehta',
     role: 'Chief Marketing Officer',
     company: 'Maison Élégance',
   },
   {
-    quote: 'Working with WeMonkey felt like collaborating with a luxury atelier. Every detail was considered, every moment was intentional. The results spoke for themselves.',
+    quote: 'Working with Orbis Group felt like collaborating with a luxury atelier. Every detail was considered, every moment was intentional. The results spoke for themselves.',
     author: 'Priya Sharma',
     role: 'Head of Brand Partnerships',
     company: 'NexGen Labs',
@@ -181,7 +184,7 @@ export const INDUSTRIES = [
 ] as const;
 
 export const TIMELINE_EVENTS = [
-  { year: '2019', title: 'Founded', description: 'WeMonkey was born from a conviction that experiences should be as considered as the brands behind them.' },
+  { year: '2019', title: 'Founded', description: 'Orbis Group was born from a conviction that experiences should be as considered as the brands behind them.' },
   { year: '2020', title: 'Digital Pivot', description: 'Pioneered hybrid experience formats, proving that digital-first doesn\'t mean experience-last.' },
   { year: '2021', title: 'First 50', description: 'Reached 50 brand partnerships and established our reputation for luxury experiential marketing.' },
   { year: '2022', title: 'National Reach', description: 'Expanded operations across 8 cities, bringing our approach to new audiences and markets.' },
